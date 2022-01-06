@@ -1,4 +1,4 @@
-package Programa;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -134,7 +134,6 @@ boolean enc= false;
 
 			public void actionPerformed(ActionEvent arg0) {
 			cadena = incad.getText();
-			System.out.println("Dentro metodo, "+cadena);
 			Cadena(cadena);
 			}
 		});
@@ -269,10 +268,7 @@ boolean enc= false;
 		for(int i=0; i<vcad.length;)
 		{
 			textsin.setText(textsin.getText()+("\nPos:"+i+" Envio --> "+vcad[i])+"\n");
-			//System.out.println("Pos:"+i+" Envio --> "+vcad[i]);
-			//System.out.println(vcad[i]+" = "+encabezado[0]);
-			
-			
+
 			if(vcad[i].equals(encabezado[0])  || 
 			   vcad[i].equals(encabezado[1])  || 
 			   vcad[i].equals(encabezado[2])  || 
@@ -345,8 +341,7 @@ boolean enc= false;
 			else
 			{ 
 				textsem.setText(textsem.getText()+"Se convirtio "+vcad[i]+" en un id"+"\n");
-				//System.out.println(vcad[i]+" + id"+" = "+(vcad[i]="id"));
-				
+
 				auxcad = vcad[i];
 				operaciones[da]=auxcad;
 				da++;
@@ -355,27 +350,23 @@ boolean enc= false;
 					doit3=true;
 				
 				word = vcad[i];
-				
-				
-				
+
 				vcad[i] = "id";
 				find=true;
 				textsem.setText(textsem.getText()+("Pos:"+i+" Envio --> "+vcad[i])+"\n");
-				
 				
 				Evaluar(vcad[i]);
 				if(enc) {
 					i++;	
 				}
-				
 			}
 		}
 		
-		System.out.println("Op pila "+Sinta);
+		/*System.out.println("Op pila "+Sinta);
 		for(int y=0; y<da;y++)
 		{
 			System.out.println(operaciones[y]);
-		}	
+		}*/	
 	}
     
     public void Evaluar(String cad)
@@ -413,13 +404,13 @@ boolean enc= false;
 						pila.pop();
 						
 						//pila.push("P");
-						System.out.println("Entrada:  " /*ren "+ren+cad+*/+" \n  Pila "+pila.firstElement()+"\n");
+						//System.out.println("Entrada:  " /*ren "+ren+cad+*/+" \n  Pila "+pila.firstElement()+"\n");
 						System.out.println("Cadena Aceptada");
 						
-						System.out.println("Código intermedio: "+middle);
+						System.out.println("CÃ³digo intermedio: "+middle);
 						
 						
-						System.out.println("Tabla:");
+						/*System.out.println("Tabla:");
 						for(int l=0;l<rt;l++)
 						{
 							System.out.println();
@@ -428,7 +419,7 @@ boolean enc= false;
 								System.out.print(tabla[l][l2]+"  ");
 							}
 						}
-						System.out.println();
+						System.out.println();*/
 						break;
 						
 					case -32://Estado 1
@@ -712,7 +703,6 @@ boolean enc= false;
 							pila.push("E");
 							pila.push("I"+(ren-3));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-							System.out.println();
 							ren =17;
 							
 							break;
@@ -742,7 +732,6 @@ boolean enc= false;
 							middle+="; \n";
 							
 							ren = matE[13][5];
-							System.out.println("Cambiamos a I"+ren);
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 							
 							break;		
@@ -786,7 +775,7 @@ boolean enc= false;
 						pila.push(encabezado[fil]);
 						enc=true;
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println(pila.peek());
+						//System.out.println(pila.peek());
 						middle+="float ";
 						break;
 					
@@ -832,19 +821,15 @@ boolean enc= false;
 						enc=true;
 						
 						tabla[rt][1]=tipodato;
-						System.out.println("Se agrego a tabla");
+						//System.out.println("Se agrego a tabla");
 						rt++;
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						
-						System.out.println(pila.peek());
+						//System.out.println(pila.peek());
 						
 						
 						middle+=word+";\n ";
-						
-						
-						
-						
-						
+
 						break;	
 						
 						
@@ -876,7 +861,7 @@ boolean enc= false;
 						
 						pila.push("I"+ren+"");						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println(pila.peek());
+						//System.out.println(pila.peek());
 						
 						//if(ren)
 						middle+="int ";
@@ -898,7 +883,7 @@ boolean enc= false;
 						tipodato="-1";
 						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println(pila.peek());
+						//System.out.println(pila.peek());
 						
 						//middle+=";\n";
 						
@@ -912,7 +897,7 @@ boolean enc= false;
 						pila.push("T");
 						pila.push("I"+(ren-1));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println();
+						//System.out.println();
 						ren = -14;
 						break;
 							
@@ -943,8 +928,7 @@ boolean enc= false;
 						pila.push("E");
 						pila.push("I"+(ren-3));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println();
-						
+					
 						middle+=word+" ";
 						
 						doit2=true;
@@ -984,7 +968,7 @@ boolean enc= false;
 						enc=true;
 						
 						tabla[rt][1]=tipodato;
-						System.out.println("Se agregp a tabla");
+						
 						rt++;
 						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
@@ -1000,7 +984,7 @@ boolean enc= false;
 						pila.push(encabezado[fil]);
 						pila.pop();
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						System.out.println(pila.peek());
+						//System.out.println(pila.peek());
 						break;
 						
 					case 20:
@@ -1091,7 +1075,7 @@ boolean enc= false;
 			val2=operaciones[da-2];
 			val1=operaciones[da-1];
 	
-			System.out.println("val1: "+val1+" val2: "+val2);
+			//System.out.println("val1: "+val1+" val2: "+val2);
 			for(int h=0; h<rt; h++)
 			{
 	
@@ -1099,16 +1083,16 @@ boolean enc= false;
 				{
 					
 					v2=Integer.parseInt(tabla[h][1]);
-					System.out.println("Pen: "+v2);
+					//System.out.println("Pen: "+v2);
 				} 
 				if(val1.equals(tabla[h][0]))
 				{
 					v=Integer.parseInt(tabla[h][1]);
-					System.out.println("Pen: "+v);
+					//System.out.println("Pen: "+v);
 				}
 				
 			}
-			System.out.println("v: "+v+" v2: "+v2);
+			//System.out.println("v: "+v+" v2: "+v2);
 			if(v!=v2)
 			{
 				//textcon.setText(textcon.getText()+("Error Semantico en : "+val2+", "+val1+" Se espera el mismo tipo de dato")+"\n");
@@ -1117,7 +1101,7 @@ boolean enc= false;
 				
 				for(int y=0; y<da;y++)
 				{
-					System.out.println(operaciones[y]);
+					//System.out.println(operaciones[y]);
 				}	
 				doit=false;
 				doit2=false;
