@@ -1,3 +1,4 @@
+package Programa;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,7 @@ public class Visual extends javax.swing.JFrame {
 	int da=0;
 	String auxcad;
 	String operaciones[]= new String[50];
-	boolean doit=false, doit2=false, doit3=false, banM=false;
+	boolean doit=false, doit2=false, doit3=false, banM=false, difurcacion=false;
 	String val1, val2;
 	int v=-1, v2=-1;
 	boolean find=false;
@@ -70,8 +71,8 @@ int  matE[][]={
 		/*21*/ {16, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  17,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  27,  19, -1},
 		/*22*/ {16, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  17,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  28,  19, -1},
 		/*23*/ {16, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  17,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  19, -1},
-		/*24*/ {16, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  17,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  -1, 21},
-		/*25*/ {-1, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  -1,   30,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  -1, -1},
+		/*24*/ {16, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  17,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  30, 21},
+		/*25*/ {-1, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  -1,   31,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  -1, -1},
 		/*26*/ {-1, -1,   -1,   -1,    -1,   -1,   -1,   -1,  -1,  -1,  -1,   -1,  -6,   -1,   -1,   -1,  -1,  -1,  -1,  -1, -1},
 		/*27*/ {-1, -1,   -1,   -1,    -9,   -9,   -9,   -9,  -1,  -1,  -1,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  -1, -1},
 		/*28*/ {-1, -1,   -1,   -1,   -10,  -10,  -10,  -10,  -1,  -1,  -1,   -1,  -1,   -1,   -1,   -1,  -1,  -1,  -1,  -1, -1},
@@ -134,6 +135,7 @@ boolean enc= false;
 
 			public void actionPerformed(ActionEvent arg0) {
 			cadena = incad.getText();
+			System.out.println("Dentro metodo, "+cadena);
 			Cadena(cadena);
 			}
 		});
@@ -268,7 +270,10 @@ boolean enc= false;
 		for(int i=0; i<vcad.length;)
 		{
 			textsin.setText(textsin.getText()+("\nPos:"+i+" Envio --> "+vcad[i])+"\n");
-
+			//System.out.println("Pos:"+i+" Envio --> "+vcad[i]);
+			//System.out.println(vcad[i]+" = "+encabezado[0]);
+			
+			
 			if(vcad[i].equals(encabezado[0])  || 
 			   vcad[i].equals(encabezado[1])  || 
 			   vcad[i].equals(encabezado[2])  || 
@@ -341,7 +346,8 @@ boolean enc= false;
 			else
 			{ 
 				textsem.setText(textsem.getText()+"Se convirtio "+vcad[i]+" en un id"+"\n");
-
+				//System.out.println(vcad[i]+" + id"+" = "+(vcad[i]="id"));
+				
 				auxcad = vcad[i];
 				operaciones[da]=auxcad;
 				da++;
@@ -350,23 +356,27 @@ boolean enc= false;
 					doit3=true;
 				
 				word = vcad[i];
-
+				
+				
+				
 				vcad[i] = "id";
 				find=true;
 				textsem.setText(textsem.getText()+("Pos:"+i+" Envio --> "+vcad[i])+"\n");
+				
 				
 				Evaluar(vcad[i]);
 				if(enc) {
 					i++;	
 				}
+				
 			}
 		}
 		
-		/*System.out.println("Op pila "+Sinta);
+		System.out.println("Op pila "+Sinta);
 		for(int y=0; y<da;y++)
 		{
 			System.out.println(operaciones[y]);
-		}*/	
+		}	
 	}
     
     public void Evaluar(String cad)
@@ -399,18 +409,22 @@ boolean enc= false;
 						ren = 1;
 						enc=true;
 						
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
 						pila.pop();
 						pila.pop();
 						pila.pop();
 						
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						
+						
 						//pila.push("P");
-						//System.out.println("Entrada:  " /*ren "+ren+cad+*/+" \n  Pila "+pila.firstElement()+"\n");
+						System.out.println("Entrada:  " /*ren "+ren+cad+*/+" \n  Pila "+pila+"\n");
 						System.out.println("Cadena Aceptada");
 						
 						System.out.println("Código intermedio: "+middle);
 						
 						
-						/*System.out.println("Tabla:");
+						System.out.println("Tabla:");
 						for(int l=0;l<rt;l++)
 						{
 							System.out.println();
@@ -419,19 +433,42 @@ boolean enc= false;
 								System.out.print(tabla[l][l2]+"  ");
 							}
 						}
-						System.out.println();*/
+						System.out.println();
 						break;
 						
 					case -32://Estado 1
 						ren = 1;
 						pila.pop();
 						pila.pop();
-						textsin.setText(textsin.getText()+("Entrada:  " /*ren "+ren+cad+*/+" \n  Pila "+pila)+"\n");
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						break;
-					case -2:
 						
+					case -2:
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("       "+" \n  Pila "+pila)+"\n");
 						
 						pila.push("P");
 						ren = 1;
@@ -441,8 +478,12 @@ boolean enc= false;
 					case -3://int
 						ren = producciones[matE[ren][i]*-1];
 						
+						
 						pila.pop();
+						
 						pila.pop();
+						
+						
 						pila.push("Tipo");
 						pila.push("I"+ren);
 						
@@ -457,8 +498,12 @@ boolean enc= false;
 						
 					case -4://float
 						ren = producciones[matE[ren][i]*-1];
+						
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						
 						pila.push("Tipo");
 						pila.push("I"+ren);
 						tipodato = "1";
@@ -470,6 +515,7 @@ boolean enc= false;
 						
 					case -5://char	
 						ren = producciones[matE[ren][i]*-1];
+						
 						pila.pop();
 						pila.push("I"+matE[ren][i]+"");
 						tipodato = "2";
@@ -493,13 +539,27 @@ boolean enc= false;
 						break;
 					
 					case -8:
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
+						pila.pop();
+						textsin.setText(textsin.getText()+("         "+" \n  Pila "+pila)+"\n");
 						pila.pop();
 						
 						pila.push("A");
@@ -509,14 +569,25 @@ boolean enc= false;
 						break;
 					
 					case -9:
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
+						textsin.setText(textsin.getText()+("        "+" \n  Pila "+pila)+"\n");
 						pila.pop();
 						pila.push("I"+ren);
-						ren=13;
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
+						
+						if(difurcacion==false)
+							ren=13;
+						else
+						//	ren=17;
 						
 						if(TP[0] > TP[2])
 						{
@@ -529,6 +600,7 @@ boolean enc= false;
 						
 						break;
 					
+						
 					case -10:
 						
 					//	middle+=";-10 ";
@@ -537,10 +609,11 @@ boolean enc= false;
 						break;
 						
 					case -11://Produccion p11
+						
 						pila.pop();
 						pila.pop();
 						pila.push("E");
-						pila.push("I"+(ren));
+						pila.push("I"+(25));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						if(cad=="*")
 						{
@@ -548,7 +621,8 @@ boolean enc= false;
 						}
 						else
 						{
-							ren = 13;
+							ren=13;
+							//ren = 13;
 						}
 						
 						if(TP[0] > TP[2])
@@ -591,7 +665,7 @@ boolean enc= false;
 							pila.pop();
 							pila.pop();
 							ren=14;
-							pila.push("T");
+							pila.push("F");
 							pila.push("I"+ren);
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 							
@@ -631,6 +705,7 @@ boolean enc= false;
 						pila.pop();
 						pila.pop();
 						pila.push("T");
+						ren=14;
 						pila.push("I"+(ren));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						
@@ -645,8 +720,13 @@ boolean enc= false;
 						pila.pop();
 						pila.pop();
 						pila.pop();
+						
 						pila.push("F");
+						ren=15;
 						pila.push("I"+ren);
+						
+						
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						
 						break;
 						
@@ -661,24 +741,31 @@ boolean enc= false;
 							pila.push("I"+(ren-1));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 							
+							
 							pila.pop();
 							pila.pop();
 							pila.push("T");
-							pila.push("I"+(ren-2));
+							ren=27;
+							pila.push("I"+(ren));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
+							ren=25;
 							
+							/*
 							pila.pop();
 							pila.pop();
 							pila.pop();
 							pila.pop();
 							pila.pop();
 							pila.pop();
-							
-							ren = 25;
+							*/
+							difurcacion=true;
+							//pos 14
+							//ren = 25;
+							/*
 							pila.push("E");
 							pila.push("I"+(ren));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-							
+							*/
 							break;
 						}
 						
@@ -686,24 +773,26 @@ boolean enc= false;
 						if(cad.equals("*") || cad.equals("/"))
 						{
 							enc=true;
+							
 							pila.pop();
 							pila.pop();
 							pila.push("F");
 							pila.push("I"+(ren-1));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-							
+							/*
 							pila.pop();
 							pila.pop();
 							pila.push("T");
 							pila.push("I"+(ren-2));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-							
+							*//*
 							pila.pop();
 							pila.pop();
 							pila.push("E");
 							pila.push("I"+(ren-3));
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-							ren =17;
+							
+							*/ren =17;
 							
 							break;
 						}
@@ -732,6 +821,7 @@ boolean enc= false;
 							middle+="; \n";
 							
 							ren = matE[13][5];
+							System.out.println("Cambiamos a I"+ren);
 							textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 							
 							break;		
@@ -773,9 +863,10 @@ boolean enc= false;
 						fil = i;
 						ren=matE[ren][fil];
 						pila.push(encabezado[fil]);
+						pila.push("I"+ren);
 						enc=true;
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						//System.out.println(pila.peek());
+						System.out.println(pila.peek());
 						middle+="float ";
 						break;
 					
@@ -821,15 +912,19 @@ boolean enc= false;
 						enc=true;
 						
 						tabla[rt][1]=tipodato;
-						//System.out.println("Se agrego a tabla");
+						System.out.println("Se agrego a tabla");
 						rt++;
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						
-						//System.out.println(pila.peek());
+						System.out.println(pila.peek());
 						
 						
 						middle+=word+";\n ";
-
+						
+						
+						
+						
+						
 						break;	
 						
 						
@@ -861,7 +956,7 @@ boolean enc= false;
 						
 						pila.push("I"+ren+"");						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						//System.out.println(pila.peek());
+						System.out.println(pila.peek());
 						
 						//if(ren)
 						middle+="int ";
@@ -883,7 +978,7 @@ boolean enc= false;
 						tipodato="-1";
 						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						//System.out.println(pila.peek());
+						System.out.println(pila.peek());
 						
 						//middle+=";\n";
 						
@@ -897,7 +992,7 @@ boolean enc= false;
 						pila.push("T");
 						pila.push("I"+(ren-1));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						//System.out.println();
+						System.out.println();
 						ren = -14;
 						break;
 							
@@ -909,26 +1004,28 @@ boolean enc= false;
 						
 						enc=true;
 						pila.push("I"+ren+"");
-						//pila.push("I"+(ren-1));
+						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
+						/*
 						pila.pop();
 						pila.pop();
 						pila.push("F");
 						pila.push("I"+(ren-1));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						
+						*//*
 						pila.pop();
 						pila.pop();
 						pila.push("T");
 						pila.push("I"+(ren-2));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						
+						*//*
 						pila.pop();
 						pila.pop();
 						pila.push("E");
 						pila.push("I"+(ren-3));
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-					
+						System.out.println();
+						*/
 						middle+=word+" ";
 						
 						doit2=true;
@@ -968,7 +1065,7 @@ boolean enc= false;
 						enc=true;
 						
 						tabla[rt][1]=tipodato;
-						
+						System.out.println("Se agregp a tabla");
 						rt++;
 						
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
@@ -982,9 +1079,9 @@ boolean enc= false;
 						fil=i;
 						ren = matE[ren][fil];
 						pila.push(encabezado[fil]);
-						pila.pop();
+//						pila.pop();
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
-						//System.out.println(pila.peek());
+						System.out.println(pila.peek());
 						break;
 						
 					case 20:
@@ -1026,8 +1123,14 @@ boolean enc= false;
 						pila.push(encabezado[fil]);
 						pila.push("I"+ren+"");
 						enc=true;
-						middle+=word3+" = "+word1+" * ";
+						middle+="\n"+word3+" = "+word1+" * ";
 						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
+						
+						/*corrigiendo error...
+						Pos:15 Envio --> *
+						Renglon-> 14. Estado-> I 8
+						Ir_a(23) --> renglon*/
+						
 						
 						break;
 					case 24:
@@ -1037,9 +1140,22 @@ boolean enc= false;
 						pila.push(encabezado[fil]);
 						pila.push("I"+ren+"");
 						enc=true;
-						middle+=word3+" = "+word1+" / ";
+						middle+="\n"+word3+" = "+word1+" / ";
 						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
 						
+						break;
+					
+					case 25:
+						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
+						break;
+					case 26:
+						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
+						break;
+					case 27:
+						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
+						break;
+					case 28:
+						textsin.setText(textsin.getText()+("Entrada:  \n  Pila "+pila)+"\n");
 						break;
 						
 					case 29:
@@ -1065,7 +1181,31 @@ boolean enc= false;
 						middle+=";\n";
 						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
 						doit2=true;
-						break;	
+						break;
+						
+					case 31:
+						fil=i;
+						ren=matE[ren][fil];
+						pila.push(encabezado[fil]);
+						pila.push("I"+ren);
+						enc=true;
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
+						
+						pila.pop();
+						pila.pop();
+						pila.pop();
+						pila.pop();
+						pila.pop();
+						pila.pop();
+						
+						pila.push(encabezado[fil]);
+						pila.push("I"+ren);
+						textsin.setText(textsin.getText()+("Entrada:  "+" \n  Pila "+pila)+"\n");
+						
+					
+						
+						break;
+						
 				}		
 			}
 		}		
@@ -1075,7 +1215,7 @@ boolean enc= false;
 			val2=operaciones[da-2];
 			val1=operaciones[da-1];
 	
-			//System.out.println("val1: "+val1+" val2: "+val2);
+			System.out.println("val1: "+val1+" val2: "+val2);
 			for(int h=0; h<rt; h++)
 			{
 	
@@ -1083,16 +1223,16 @@ boolean enc= false;
 				{
 					
 					v2=Integer.parseInt(tabla[h][1]);
-					//System.out.println("Pen: "+v2);
+					System.out.println("Pen: "+v2);
 				} 
 				if(val1.equals(tabla[h][0]))
 				{
 					v=Integer.parseInt(tabla[h][1]);
-					//System.out.println("Pen: "+v);
+					System.out.println("Pen: "+v);
 				}
 				
 			}
-			//System.out.println("v: "+v+" v2: "+v2);
+			System.out.println("v: "+v+" v2: "+v2);
 			if(v!=v2)
 			{
 				//textcon.setText(textcon.getText()+("Error Semantico en : "+val2+", "+val1+" Se espera el mismo tipo de dato")+"\n");
@@ -1101,7 +1241,7 @@ boolean enc= false;
 				
 				for(int y=0; y<da;y++)
 				{
-					//System.out.println(operaciones[y]);
+					System.out.println(operaciones[y]);
 				}	
 				doit=false;
 				doit2=false;
@@ -1147,4 +1287,152 @@ boolean enc= false;
             }
         });
     }                
+    
+    
+    /*
+Pos:0 Envio --> int
+Renglon-> 0. Estado-> I 1
+Ir_a(4) --> renglon
+Entrada:   
+  Pila [$, I0, int, I4]
+
+Pos:1 Envio --> var1
+Renglon-> 4. Estado-> I 0
+Ir_a(-3) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2]
+
+Pos:1 Envio --> id
+Renglon-> 2. Estado-> I 0
+Ir_a(8) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8]
+
+Pos:2 Envio --> ,
+Renglon-> 8. Estado-> I 4
+Ir_a(11) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11]
+
+Pos:3 Envio --> var2
+Renglon-> 11. Estado-> I 0
+Ir_a(18) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18]
+
+Pos:4 Envio --> ;
+Renglon-> 18. Estado-> I 5
+Ir_a(12) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, I12]
+
+Pos:5 Envio --> float
+Renglon-> 12. Estado-> I 2
+Ir_a(5) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, I12, float]
+
+Pos:6 Envio --> var3
+Renglon-> 5. Estado-> I 0
+Ir_a(-4) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2]
+
+Pos:6 Envio --> id
+Renglon-> 2. Estado-> I 0
+Ir_a(8) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8]
+
+Pos:7 Envio --> ;
+Renglon-> 8. Estado-> I 5
+Ir_a(12) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12]
+
+Pos:8 Envio --> var3
+Renglon-> 12. Estado-> I 0
+Ir_a(7) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7]
+
+Pos:9 Envio --> =
+Renglon-> 7. Estado-> I 20
+Ir_a(9) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9]
+
+Pos:10 Envio --> (
+Renglon-> 9. Estado-> I 10
+Ir_a(17) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17]
+
+Pos:11 Envio --> var2
+Renglon-> 17. Estado-> I 0
+Ir_a(16) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, id, I16]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, F, I15]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, T, I14]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I13]
+
+Pos:12 Envio --> +
+Renglon-> 16. Estado-> I 6
+Ir_a(-16) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, F, I15]
+
+Pos:12 Envio --> +
+Renglon-> 15. Estado-> I 6
+Ir_a(-14) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, T, I15]
+
+Pos:12 Envio --> +
+Renglon-> 14. Estado-> I 6
+Ir_a(-11) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14]
+
+Pos:12 Envio --> +
+Renglon-> 13. Estado-> I 6
+Ir_a(21) --> renglon
+Entrada:  
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21]
+
+Pos:13 Envio --> var2
+Renglon-> 21. Estado-> I 0
+Ir_a(16) --> renglon
+Entrada:   cyan
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, id, I16]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, F, I15]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, T, I14]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, E, I13]
+
+Pos:14 Envio --> )
+Renglon-> 16. Estado-> I 11
+Ir_a(-16) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, F, I15]
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I14, +, I21, T, I14] 
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, (, I17, E, I25]      v1=v1+v2
+
+
+
+Pos:16 Envio --> var3
+Renglon-> 23. Estado-> I 0
+Ir_a(16) --> renglon
+Entrada:   
+  Pila [$, I0, Tipo, I2, id, I8, ,, I11, id, I18, ;, Tipo, I2, id, I8, ;, I12, id, I7, =, I9, F, I14, *, I23, id, I16]  cyan v2=var3
+Entrada:   
+*/ 
 }
